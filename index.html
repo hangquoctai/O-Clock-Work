@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O'Clock</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="info">
+            <h1>T - O'Clock</h1>
+        </div>
+        <div class="show" id="done">
+            <h1>Làm việc </h1>
+            <div class="time" id="time_done">
+                <h1>:</h1>
+                <li class="box" id="d"></li>
+                <li class="box" id="h"></li>
+                <li class="box" id="m"></li>
+                <li class="box" id="s"></li>
+            </div>
+        </div>
+    </div>
+    <script>
+        var li_done = document.getElementById("time_done");
+        var done = document.getElementById('done');
+        var end = new Date().getTime() + (1000 * 3600);
+        var days, hours, minutes, seconds;
+
+        setInterval(function () { countDown(); }, 1000);
+        function countDown() {
+            var current = new Date().getTime();
+            var s_left = (end - current) / 1000;
+
+            days = pad(parseInt(s_left / 86400));
+            s_left = s_left % 86400;
+            hours = pad(parseInt(s_left / 3600));
+            s_left = s_left % 3600;
+            minutes = pad(parseInt(s_left / 60));
+            seconds = pad(parseInt(s_left % 60));
+            if (seconds == 0) {
+                done.style.textDecoration = "line-through";
+                li_done.style.display = "none";
+            }
+
+            document.getElementById('d').innerText = days;
+            document.getElementById('h').innerText = hours;
+            document.getElementById('m').innerText = minutes;
+            document.getElementById('s').innerText = seconds;
+        }
+        function pad(n) {
+            return (n < 10 ? "0" : "") + n;
+        }
+
+
+    </script>
+</body>
+
+</html>
